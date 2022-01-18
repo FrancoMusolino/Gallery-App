@@ -1,0 +1,119 @@
+html{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+h1{
+    text-align: center;
+    font-size: clamp(2rem, 3rem, 4rem);
+    font-family:'Arial Narrow Bold', sans-serif;
+    color: #cc4311;
+    letter-spacing: 2px;
+    user-select: none;
+}
+
+h1:hover{
+    transform: scale(1.2);
+    transition: transform .5s;
+}
+
+.navbar{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+h2{
+    font-size: clamp(1rem, 2rem, 2.5rem);
+}
+
+.add{
+    border: solid 1.5px #aaa;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    padding: .5rem;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.container{
+    margin: 0;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+}
+
+img{
+    object-fit: cover;
+    width: calc(99vw / 3);
+    height: calc(99vw / 3);
+}
+
+.ventana-modal{
+    position: absolute;
+    left: calc(50vw - 150px);
+    top: -1200px;
+    width: 60%;
+    border: solid 2px #aaa;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    transition: top 1s linear;
+}
+
+.ventana-modal h2{
+    text-align: center;
+    color: forestgreen;
+}
+
+.ventana-modal select{
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    height: 35px;
+    border: 0px;
+    border-radius: 7px;
+    background: linear-gradient(to bottom, #ccc, #888);
+    margin-bottom: 30px;
+}
+
+.ventana-modal select:focus{
+    outline: none;
+}
+
+.button-container{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.button-container button{
+    background-color: #82d3d9;
+
+}
+
+.button-container input{
+    background-color: #fff;
+}
+
+.button-container input, .button-container button{
+    border-radius: 5px;
+    font-weight: 500;
+    width: 30%;
+    height: 30px;
+    border: 1px solid #333;
+}
+
+.visible{
+    top: calc((100vh / 2) - 90px);
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Galería</h1>
+    <hr>
+    <section class="navbar">
+        <h2>Mis fotos</h2>
+        <div id="open" class="add">+</div>
+    </section>
+    <div id="container" class="container">
+    </div>
+
+    <section class="ventana-modal">
+        <h2>Agregar Imagen</h2>
+        <select id="categories">
+            <option value=""></option>
+            <option value="animals">Animales</option>
+            <option value="architecture">Arquitectura</option>
+            <option value="nature">Naturaleza</option>
+            <option value="people">Gente</option>
+            <option value="tech">Tecnología</option>
+        </select>
+        <div class="button-container">
+            <button id="close">Cancelar</button>
+            <input type="submit" value="Agregar" id="add"></input>
+        </div>
+    </section>
+
+    <template class="templateImg" id="templateImg">
+        <img src="" alt="">
+    </template>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+[
+    {
+        "src": "https://placeimg.com/640/480/nature",
+        "category": "nature",
+        "id": 1
+    },
+    {
+        "src": "https://placeimg.com/640/480/animals",
+        "category": "animals",
+        "id": 2
+    },
+    {
+        "src": "https://placeimg.com/640/480/tech",
+        "category": "tech",
+        "id": 3
+    },
+    {
+        "src": "https://placeimg.com/640/480/people",
+        "category": "people",
+        "id": 4
+    },
+    {
+        "src": "https://placeimg.com/640/480/architecture",
+        "category": "architecture",
+        "id": 5
+    },
+    {
+        "src": "https://placeimg.com/640/480/tech",
+        "category": "tech",
+        "id": 6
+    }
+]
