@@ -9,7 +9,7 @@ body{
 
 h1{
     text-align: center;
-    font-size: clamp(2rem, 3rem, 4rem);
+    font-size: clamp(3rem, 4rem, 5rem);
     font-family:'Arial Narrow Bold', sans-serif;
     color: #cc4311;
     letter-spacing: 2px;
@@ -30,7 +30,7 @@ h1:hover{
 }
 
 h2{
-    font-size: clamp(1rem, 2rem, 2.5rem);
+    font-size: clamp(2rem, 3rem, 4rem);
 }
 
 .add{
@@ -54,17 +54,56 @@ h2{
     gap: 2px;
 }
 
+.template-container{
+    position: relative;
+    overflow: hidden;
+    border-radius: .3rem;
+}
+
+.delete-container{
+    cursor: pointer;
+    position: absolute;
+    bottom: -100%;
+    width: 97%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(230, 20, 20, .7);
+    border-radius: .3rem;
+    transition: .3s;
+}
+
+.template-container:hover .delete-container{
+    bottom: 0;
+}
+
+.delete-container p{
+    font-size: 35px;
+    color: #fff;
+    font-weight: 700;
+    user-select: none;
+}
+
+.delete-container i{
+    font-size: 25px;
+    color: #fff;
+    margin-left: 35px;
+}
+
 img{
     object-fit: cover;
+    border-radius: .3rem;
     width: calc(99vw / 3);
     height: calc(99vw / 3);
 }
 
 .ventana-modal{
-    position: absolute;
-    left: calc(50vw - 150px);
+    position: fixed;
+    left: 16%;
     top: -1200px;
-    width: 60%;
+    width: 65%;
     border: solid 2px #aaa;
     background-color: #eeeeee;
     border-radius: 10px;
@@ -74,6 +113,7 @@ img{
 .ventana-modal h2{
     text-align: center;
     color: forestgreen;
+    font-size: clamp(1.5rem, 2rem, 3rem);
 }
 
 .ventana-modal select{
@@ -116,4 +156,35 @@ img{
 
 .visible{
     top: calc((100vh / 2) - 90px);
+}
+
+@media only screen and (min-width: 740px) {
+    .container{
+        margin: 0 auto;
+        width: 80%;
+        gap: 10px;
+    }
+
+    img{
+        width: calc( 75vw / 3);
+        height: calc(75vw / 3);
+    }
+
+    
+.ventana-modal{
+    left: 30%;
+    width: 40%;
+}
+
+.ventana-modal h2{
+    margin-bottom: 55px;
+}
+
+.ventana-modal select{
+    height: 40px;
+    border: 0px;
+    border-radius: 7px;
+    background: linear-gradient(to bottom, #ccc, #888);
+    margin-bottom: 65px;
+}
 }

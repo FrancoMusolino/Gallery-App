@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// localStorage.setItem('images', JSON.stringify(images));
-
 const fetchData = async () => {
     try {
         const res = await fetch('api.json');
@@ -28,11 +26,31 @@ const fetchData = async () => {
     }
 }
 
+const deleteImg = () => {
+
+}
+
 const introduceImg = data => {
-    images = data;
+    if (localStorage.getItem('images')) {
+        images = JSON.parse(localStorage.getItem('images'))
+    } else {
+        images = data;
+    }
     images.forEach(image => {
         templateImg.querySelector('img').setAttribute('src', image.src);
         templateImg.querySelector('img').setAttribute('alt', image.category);
+
+        if (image.id < 10) {
+            templateImg.querySelector('.delete-container').style.visibility = "hidden";
+        } else {
+            templateImg.querySelector('.delete-container').style.visibility = "visible";
+
+            // No toma el deleteContainer como un elemento válido para realizar el evento click
+
+            // const deleteContainer = document.getElementById('delete-container');
+            // console.log(deleteContainer)
+            // deleteContainer.addEventListener('click', () => console.log("entre"));
+        }
 
         const clone = templateImg.cloneNode(true);
         container.appendChild(clone);
@@ -41,6 +59,15 @@ const introduceImg = data => {
 
 openButton.addEventListener('click', () => ventanaModal.classList.add('visible'));
 closeButton.addEventListener('click', () => ventanaModal.classList.remove('visible'));
+
+const introduceNewImg = () => {
+    let newItem = images.pop()
+    templateImg.querySelector('img').setAttribute('src', newItem.src);
+    templateImg.querySelector('img').setAttribute('alt', newItem.category);
+
+    const clone = templateImg.cloneNode(true);
+    container.appendChild(clone);
+}
 
 const addImage = e => {
     e.preventDefault();
@@ -53,11 +80,13 @@ const addImage = e => {
             alt: category,
             id: Date.now()
         })
+        ventanaModal.classList.remove('visible');
+        localStorage.setItem('images', JSON.stringify(images));
         introduceNewImg();
     }
 }
 
-addImg.addEventListener('click', e => addImage(e))
+addImg.addEventListener('click', e => addImage(e));
 
 
 
