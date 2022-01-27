@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -12,40 +12,49 @@
 </head>
 
 <body>
-    <h1>Galería</h1>
+    <h1 class="title" role="heading">Galería</h1>
+
     <hr>
-    <section class="navbar">
-        <h2>Mis fotos</h2>
-        <div id="open" class="add">+</div>
-    </section>
-    <div id="container" class="container">
+
+    <nav class="navbar" role="menu">
+        <div class="navbar__add-image">
+            <h2 class="navbar__title">Mis fotos</h2>
+            <div class="navbar__button" id="open">+</div>
+        </div>
+        <div class="navbar__delete-image" id="delete-image">
+            <p class="navbar__text">Eliminar Imágenes</p>
+            <i class="navbar__icon far fa-trash-alt"></i>
+        </div>
+    </nav>
+
+    <div class="main-container" id="container" role="main">
     </div>
 
-    <section class="ventana-modal">
-        <h2>Agregar Imagen</h2>
-        <select id="categories">
-            <option value=""></option>
-            <option value="animals">Animales</option>
-            <option value="architecture">Arquitectura</option>
-            <option value="nature">Naturaleza</option>
-            <option value="people">Gente</option>
-            <option value="tech">Tecnología</option>
+    <div class="delete-container">
+        <button class="delete-container__button">ELIMINAR</button>
+    </div>
+
+    <section class="ventana-modal" role="form">
+        <h2 class="ventana-modal__title">Agregar Imagen</h2>
+        <select class="ventana-modal__form" id="categories">
+            <option class="ventana-modal__option" value=""></option>
+            <option class="ventana-modal__option" value="animals">Animales</option>
+            <option class="ventana-modal__option" value="architecture">Arquitectura</option>
+            <option class="ventana-modal__option" value="nature">Naturaleza</option>
+            <option class="ventana-modal__option" value="people">Gente</option>
+            <option class="ventana-modal__option" value="tech">Tecnología</option>
         </select>
-        <div class="button-container">
-            <button id="close">Cancelar</button>
-            <input type="submit" value="Agregar" id="add"></input>
+
+        <div class="ventana-modal__button-container">
+            <button class="ventana-modal__close-button" id="close">Cancelar</button>
+            <input class="ventana-modal__add-button" id="add-button" type="submit" value="Agregar"></input>
         </div>
     </section>
 
-    <template class="templateImg" id="templateImg">
-        <div class="template-container">
-            <img src="" alt="">
-            <div class="delete-container" id="delete-container">
-                <div class="delete-subcontainer">
-                    <p>Delete</p>
-                    <i class="far fa-trash-alt"></i>
-                </div>
-            </div>
+    <template class="template-img" id="templateImg">
+        <div class="template-img__container">
+            <img class="template-img__img" src="" alt="">
+            <input class="template-img__checkbox" type="checkbox">
         </div>
     </template>
 

@@ -1,3 +1,14 @@
+:root {
+    --step--2: clamp(1.48rem, 1.27rem + 1.02vw, 2.00rem);
+    --step--1: clamp(1.77rem, 1.49rem + 1.42vw, 2.50rem);
+    --step-0: clamp(2.13rem, 1.73rem + 1.95vw, 3.13rem);
+    --step-1: clamp(2.55rem, 2.02rem + 2.65vw, 3.91rem);
+    --step-2: clamp(3.06rem, 2.35rem + 3.56vw, 4.88rem);
+    --step-3: clamp(3.67rem, 2.72rem + 4.75vw, 6.10rem);
+    --step-4: clamp(4.41rem, 3.15rem + 6.29vw, 7.63rem);
+    --step-5: clamp(5.29rem, 3.63rem + 8.29vw, 9.54rem);
+  }
+
 html{
     box-sizing: border-box;
 }
@@ -7,16 +18,16 @@ body{
     -webkit-tap-highlight-color: transparent;
 }
 
-h1{
+.title{
     text-align: center;
-    font-size: clamp(3rem, 4rem, 5rem);
+    font-size: var(--step-2);
     font-family:'Arial Narrow Bold', sans-serif;
-    color: #cc4311;
+    color: #eed183;
     letter-spacing: 2px;
     user-select: none;
 }
 
-h1:hover{
+.title:hover{
     transform: scale(1.2);
     transition: transform .5s;
 }
@@ -25,15 +36,27 @@ h1:hover{
     width: 80%;
     margin: 0 auto;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
 }
 
-h2{
-    font-size: clamp(2rem, 3rem, 4rem);
+.navbar__add-image{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
-.add{
+.navbar__title{
+    margin: 15px 0;
+    font-size: var(--step-0);
+    font-weight: 400;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.navbar__button{
     border: solid 1.5px #aaa;
     border-radius: 50%;
     height: 20px;
@@ -46,7 +69,40 @@ h2{
     cursor: pointer;
 }
 
-.container{
+.navbar__delete-image{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+}
+
+.navbar__text{
+    font-size: 1.5em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.navbar__icon{
+    color: #e00;
+    font-size: 22px;
+    animation: trash 1s ease-in infinite;
+}
+
+@keyframes trash{
+    0%{ transform: rotate(0); } 
+
+    20%{ transform: rotate(25deg); }
+
+    40%{ transform: rotate(-25deg); }
+
+    60%{ transform: rotate(25deg); }
+
+    80%{ transform: rotate(-25deg); }
+
+    100%{ transform: rotate(0); }
+}
+
+.main-container{
     margin: 0;
     width: 100vw;
     display: grid;
@@ -54,49 +110,15 @@ h2{
     gap: 2px;
 }
 
-.template-container{
-    position: relative;
-    overflow: hidden;
-    border-radius: .3rem;
-}
-
 .delete-container{
-    cursor: pointer;
-    position: absolute;
-    bottom: -100%;
-    width: 97%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: rgba(230, 20, 20, .7);
-    border-radius: .3rem;
-    transition: .3s;
+    text-align: center;
+    margin: 25px;
 }
 
-.template-container:hover .delete-container{
-    bottom: 0;
-}
-
-.delete-container p{
-    font-size: 35px;
+.delete-container__button{
+    width: 30%;
+    letter-spacing: 5px;
     color: #fff;
-    font-weight: 700;
-    user-select: none;
-}
-
-.delete-container i{
-    font-size: 25px;
-    color: #fff;
-    margin-left: 35px;
-}
-
-img{
-    object-fit: cover;
-    border-radius: .3rem;
-    width: calc(99vw / 3);
-    height: calc(99vw / 3);
 }
 
 .ventana-modal{
@@ -110,13 +132,13 @@ img{
     transition: top 1s linear;
 }
 
-.ventana-modal h2{
+.ventana-modal__title{
     text-align: center;
     color: forestgreen;
     font-size: clamp(1.5rem, 2rem, 3rem);
 }
 
-.ventana-modal select{
+.ventana-modal__form{
     display: block;
     margin: 0 auto;
     width: 60%;
@@ -125,28 +147,41 @@ img{
     border-radius: 7px;
     background: linear-gradient(to bottom, #ccc, #888);
     margin-bottom: 30px;
+    cursor: pointer;
 }
 
-.ventana-modal select:focus{
+.ventana-modal__form:focus{
     outline: none;
 }
 
-.button-container{
+.ventana-modal__button-container{
     display: flex;
     justify-content: space-around;
     margin-bottom: 10px;
 }
 
-.button-container button{
+.ventana-modal__close-button{
     background-color: #82d3d9;
+    cursor: pointer;
 
 }
 
-.button-container input{
+.ventana-modal__close-button:hover{
+    background-color: #a2e3e9;
+
+}
+
+.ventana-modal__add-button{
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.ventana-modal__add-button:hover{
     background-color: #fff;
 }
 
-.button-container input, .button-container button{
+.ventana-modal__close-button,
+.ventana-modal__add-button{
     border-radius: 5px;
     font-weight: 500;
     width: 30%;
@@ -157,34 +192,59 @@ img{
 .visible{
     top: calc((100vh / 2) - 90px);
 }
+ 
+.template-img__container{
+    position: relative;
+    overflow: hidden;
+    border-radius: .3rem;
+}
+
+.template-img__img{
+    object-fit: cover;
+    border-radius: .3rem;
+    width: calc((100vw / 3) - (4px / 3));
+    height: calc((100vw / 3) - (4px / 3));
+}
+
+.template-img__checkbox{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.visible-checkbox{
+    visibility: visible;
+}
 
 @media only screen and (min-width: 740px) {
-    .container{
+    .main-container{
         margin: 0 auto;
         width: 80%;
         gap: 10px;
     }
 
-    img{
+    .template-img__img{
         width: calc( 75vw / 3);
         height: calc(75vw / 3);
     }
 
     
-.ventana-modal{
-    left: 30%;
-    width: 40%;
-}
+    .ventana-modal{
+        left: 30%;
+        width: 40%;
+    }
 
-.ventana-modal h2{
-    margin-bottom: 55px;
-}
+    .ventana-modal__title{
+        margin-bottom: 55px;
+    }
 
-.ventana-modal select{
-    height: 40px;
-    border: 0px;
-    border-radius: 7px;
-    background: linear-gradient(to bottom, #ccc, #888);
-    margin-bottom: 65px;
-}
+    .ventana-modal__form{
+        height: 40px;
+        border: 0px;
+        border-radius: 7px;
+        background: linear-gradient(to bottom, #ccc, #888);
+        margin-bottom: 65px;
+    }
 }
