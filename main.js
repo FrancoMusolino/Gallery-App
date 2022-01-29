@@ -6,6 +6,7 @@ const ventanaModal = document.querySelector('.ventana-modal');
 const selectCategories = document.getElementById('categories');
 const addImg = document.getElementById('add-button');
 const deleteImg = document.getElementById('delete-image');
+const deleteButton = document.getElementById('delete-container');
 
 let images = [];
 
@@ -62,13 +63,17 @@ const addImage = e => {
     if (selectCategories.value === "") {
         alert("Para agregar una imagen, debe seleccionar su categoría")
     } else {
-        let category = selectCategories.value
+        let category = selectCategories.value;
+
+        /* Agrega una imagen al mismo array, por eso nunca suma más de 1 */
+
         images.push({
             src: `https://placeimg.com/640/480/${category}`,
             alt: category,
             id: Date.now()
         })
         ventanaModal.classList.remove('visible');
+        selectCategories.value = "";
         localStorage.setItem('images', JSON.stringify(images));
         introduceNewImg();
     }
@@ -76,15 +81,43 @@ const addImage = e => {
 
 addImg.addEventListener('click', e => addImage(e));
 
-const deleteImage = () => {
+const openCheckbox = () => {
     const imagesInDom = document.querySelectorAll('.template-img__container');
-    console.log(imagesInDom)
     imagesInDom.forEach(item => {
+        const itemCheckbox = item.querySelector('input');
         if (item.getAttribute('id') > 10) {
-            item.querySelector('input').classList.add('visible-checkbox');
+            itemCheckbox.classList.add('visible-checkbox');
         }
-    })
+
+        item.addEventListener('click', () => {
+            if (!itemCheckbox.getAttribute('checked')) {
+                itemCheckbox.setAttribute('checked', true);
+            } else {
+                itemCheckbox.removeAttribute('checked');
+            }
+        });
+    });
+
+    deleteButton.classList.add('delete-container--visible');
 }
 
-deleteImg.addEventListener('click', deleteImage);
+deleteImg.addEventListener('click', openCheckbox);
 
+const deleteImage = () => {
+    const imagesInDom = document.querySelectorAll('.template-img__container');
+    let auth = confirm('¿Seguro desea eliminar las imágenes?');
+
+    if (auth) {
+        imagesInDom.forEach(item => {
+            const itemCheckbox = item.querySelector('input');
+            if (itemCheckbox.checked) {
+                let itemId = item.getAttribute('id');
+                container.removeChild(item);
+                let newImages = images.filter(image => image.id !== itemId);
+                localStorage.setItem('images', JSON.stringify(newImages));
+            }
+        })
+    }
+}
+
+deleteButton.addEventListener('click', deleteImage);

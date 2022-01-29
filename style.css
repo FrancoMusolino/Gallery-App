@@ -113,12 +113,26 @@ body{
 .delete-container{
     text-align: center;
     margin: 25px;
+    visibility: hidden;
 }
 
 .delete-container__button{
     width: 30%;
-    letter-spacing: 5px;
+    padding: 6px;
+    letter-spacing: 4px;
     color: #fff;
+    background-color: #c82333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-container--visible{
+    visibility: visible;
+}
+
+.delete-container__button:hover{
+    background-color: #e82333;
 }
 
 .ventana-modal{
@@ -208,8 +222,8 @@ body{
 
 .template-img__checkbox{
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 3%;
+    right: 3%;
     visibility: hidden;
     cursor: pointer;
 }
@@ -246,5 +260,9 @@ body{
         border-radius: 7px;
         background: linear-gradient(to bottom, #ccc, #888);
         margin-bottom: 65px;
+    }
+
+    .template-img__checkbox{
+       right: 4%;
     }
 }
