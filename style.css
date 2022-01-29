@@ -46,12 +46,12 @@ body{
     height: auto;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .navbar__title{
     margin: 15px 0;
-    font-size: var(--step-0);
+    font-size: var(--step--1);
     font-weight: 400;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -70,21 +70,24 @@ body{
 }
 
 .navbar__delete-image{
-    width: 50%;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     cursor: pointer;
 }
 
 .navbar__text{
-    font-size: 1.5em;
+    font-size: var(--step--2);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .navbar__icon{
     color: #e00;
-    font-size: 22px;
+    font-size: var(--step-0);
+}
+
+.navbar__icon--animation{
     animation: trash 1s ease-in infinite;
 }
 
@@ -111,13 +114,17 @@ body{
 }
 
 .delete-container{
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
     margin: 25px;
     visibility: hidden;
 }
 
 .delete-container__button{
-    width: 30%;
+    width: 60%;
     padding: 6px;
     letter-spacing: 4px;
     color: #fff;
@@ -127,12 +134,21 @@ body{
     cursor: pointer;
 }
 
+.delete-container__button--cancel{
+    color: #bbb;
+    background-color: #222;
+}
+
 .delete-container--visible{
     visibility: visible;
 }
 
 .delete-container__button:hover{
     background-color: #e82333;
+}
+
+.delete-container__button--cancel:hover{
+    background-color: #454545;
 }
 
 .ventana-modal{
@@ -233,10 +249,26 @@ body{
 }
 
 @media only screen and (min-width: 740px) {
+    .navbar__add-image{
+        justify-content: space-around;
+    }
+
+    .navbar__delete-image{
+        justify-content: space-around;
+    }
+
     .main-container{
         margin: 0 auto;
         width: 80%;
         gap: 10px;
+    }
+
+    .delete-container{
+        flex-direction: row;
+    }
+
+    .delete-container__button{
+        width: 60%;
     }
 
     .template-img__img{

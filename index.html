@@ -23,7 +23,7 @@
         </div>
         <div class="navbar__delete-image" id="delete-image">
             <p class="navbar__text">Eliminar Imágenes</p>
-            <i class="navbar__icon far fa-trash-alt"></i>
+            <i class="navbar__icon far fa-trash-alt" id="trash-icon"></i>
         </div>
     </nav>
 
@@ -31,7 +31,8 @@
     </div>
 
     <div class="delete-container" id="delete-container">
-        <button class="delete-container__button">ELIMINAR</button>
+        <button class="delete-container__button delete-container__button--cancel" id="cancel-button">CANCELAR</button>
+        <button class="delete-container__button" id="delete-button">ELIMINAR</button>
     </div>
 
     <section class="ventana-modal" role="form">
