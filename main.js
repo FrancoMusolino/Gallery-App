@@ -85,10 +85,10 @@ const addImage = e => {
 addImg.addEventListener('click', e => addImage(e));
 
 const openCheckbox = () => {
-    trashIcon.classList.toggle('navbar__icon--animation');
     if (images.length === 0) {
         alert("No hay imágenes para eliminar");
     } else {
+        trashIcon.classList.toggle('navbar__icon--animation');
         deleteContainer.classList.toggle('delete-container--visible');
         const imagesInDom = document.querySelectorAll('.template-img__container');
         imagesInDom.forEach(item => {
@@ -109,15 +109,10 @@ const openCheckbox = () => {
 deleteImg.addEventListener('click', openCheckbox);
 
 const deleteItemOfArray = id => {
-    console.log(id, images)
-    let newImages = images.filter(el => {
-        el.id !== id
-        console.log(el.id)
-        console.log(id)
-    }
-    );
-    console.log(newImages);
-    // localStorage.setItem('images', JSON.stringify(newImages));
+    let newId = parseInt(id);
+    let newImages = images.filter(el => el.id !== newId);
+    images = newImages;
+    localStorage.setItem('images', JSON.stringify(newImages));
 }
 
 const deleteImage = () => {
@@ -146,7 +141,10 @@ const deleteImage = () => {
                 deleteItemOfArray(itemId)
                 container.removeChild(item);
             }
+            itemCheckbox.classList.remove('visible-checkbox');
         })
+        deleteContainer.classList.remove('delete-container--visible');
+        trashIcon.classList.remove('navbar__icon--animation');
     }
 }
 
