@@ -1,14 +1,10 @@
 // @ts-check
 
-import { fetchData, transformJSON } from "./utils.js";
+import { fetchData, getLS, printImg, setLS } from "./utils.js";
 
 const container = /**
  @type {HTMLElement}
  */ (document.getElementById("container"));
-
-const templateImg = /**@type {HTMLTemplateElement}*/ (
-  document.getElementById("templateImg")
-);
 
 const openButton = /**@type {HTMLElement}*/ (document.getElementById("open"));
 
@@ -48,14 +44,12 @@ const cancelButton = /**@type {HTMLButtonElement}*/ (
   document.getElementById("cancel-button")
 );
 
-/**
- * @type {import('./types').Response[]}
- */
+/** @type {import('./types').Response[]} */
 
 let images;
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const dataInLS = transformJSON("images");
+  const dataInLS = getLS("images");
 
   if (dataInLS) {
     images = dataInLS;
@@ -69,23 +63,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  introduceImg(images);
+  addInitialImages(images);
 });
 
 /**
  * @param {import('./types').Response[]} images
  */
 
-const introduceImg = (images) => {
-  const templateContent = templateImg.content;
-
+const addInitialImages = (images) => {
   images.forEach((image) => {
-    templateContent.querySelector("img")?.setAttribute("src", image.src);
-    templateContent.querySelector("img")?.setAttribute("alt", image.category);
-    templateContent.querySelector("div")?.setAttribute("id", String(image.id));
-
-    const clone = templateContent.cloneNode(true);
-    container.appendChild(clone);
+    printImg(image);
   });
 };
 
@@ -98,37 +85,39 @@ closeButton.addEventListener("click", () => {
   selectCategories.value = "";
 });
 
-const introduceNewImg = (newImage) => {
-  templateImg.querySelector("img").setAttribute("src", newImage.src);
-  templateImg.querySelector("img").setAttribute("alt", newImage.category);
-  templateImg.querySelector("div").setAttribute("id", newImage.id);
-
-  const clone = templateImg.cloneNode(true);
-  container.appendChild(clone);
-};
+/**
+ * @param {MouseEvent} e
+ */
 
 const addImage = (e) => {
   e.preventDefault();
-  if (selectCategories.value === "") {
-    alert("Para agregar una imagen, debe seleccionar su categoría");
-  } else {
-    let category = selectCategories.value;
 
-    let newImage = {
-      src: `https://placeimg.com/640/480/${category}`,
-      alt: category,
-      id: +new Date(),
-    };
-    introduceNewImg(newImage);
-    let newImages = [...images, newImage];
-    images = newImages;
-    ventanaModal.classList.remove("visible");
-    selectCategories.value = "";
-    localStorage.setItem("images", JSON.stringify(newImages));
+  if (selectCategories.value === "") {
+    return alert("Para agregar una imagen, debe seleccionar su categoría");
   }
+
+  /**@type {string} */
+
+  let category = selectCategories.value;
+
+  /**@type {import('./types').Response} */
+
+  let newImage = {
+    src: `https://placeimg.com/640/480/${category}`,
+    category,
+    id: +new Date(),
+  };
+
+  printImg(newImage);
+  images.push(newImage);
+
+  ventanaModal.classList.remove("visible");
+  selectCategories.value = "";
+
+  setLS("images", images);
 };
 
-addImg?.addEventListener("click", (e) => addImage(e));
+addImg.addEventListener("click", (e) => addImage(e));
 
 const openCheckbox = () => {
   if (images.length === 0) {
