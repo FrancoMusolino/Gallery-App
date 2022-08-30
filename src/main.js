@@ -1,19 +1,52 @@
 // @ts-check
 
-import { fetchData } from "./utils.js";
+import { fetchData, transformJSON } from "./utils.js";
 
-const container = document.getElementById("container");
-const templateImg = document.getElementById("templateImg").content;
-const openButton = document.getElementById("open");
-const closeButton = document.getElementById("close");
-const ventanaModal = document.querySelector(".ventana-modal");
-const selectCategories = document.getElementById("categories");
-const addImg = document.getElementById("add-button");
-const deleteImg = document.getElementById("delete-image");
-const trashIcon = document.getElementById("trash-icon");
-const deleteContainer = document.getElementById("delete-container");
-const deleteButton = document.getElementById("delete-button");
-const cancelButton = document.getElementById("cancel-button");
+const container = /**
+ @type {HTMLElement}
+ */ (document.getElementById("container"));
+
+const templateImg = /**@type {HTMLTemplateElement}*/ (
+  document.getElementById("templateImg")
+);
+
+const openButton = /**@type {HTMLElement}*/ (document.getElementById("open"));
+
+const closeButton = /**@type {HTMLButtonElement}*/ (
+  document.getElementById("close")
+);
+
+const ventanaModal = /**@type {HTMLElement}*/ (
+  document.querySelector(".ventana-modal")
+);
+
+const selectCategories = /**@type {HTMLSelectElement}*/ (
+  document.getElementById("categories")
+);
+
+const addImg = /**@type {HTMLButtonElement}*/ (
+  document.getElementById("add-button")
+);
+
+const deleteImg = /**@type {HTMLElement}*/ (
+  document.getElementById("delete-image")
+);
+
+const trashIcon = /**@type {HTMLButtonElement}*/ (
+  document.getElementById("trash-icon")
+);
+
+const deleteContainer = /**@type {HTMLElement}*/ (
+  document.getElementById("delete-container")
+);
+
+const deleteButton = /**@type {HTMLButtonElement}*/ (
+  document.getElementById("delete-button")
+);
+
+const cancelButton = /**@type {HTMLButtonElement}*/ (
+  document.getElementById("cancel-button")
+);
 
 /**
  * @type {import('./types').Response[]}
@@ -22,18 +55,21 @@ const cancelButton = document.getElementById("cancel-button");
 let images;
 
 document.addEventListener("DOMContentLoaded", async () => {
-  try {
-    if (localStorage.getItem("images")) {
-      images = JSON.parse(localStorage.getItem("images"));
-    } else {
+  const dataInLS = transformJSON("images");
+
+  if (dataInLS) {
+    images = dataInLS;
+  } else {
+    try {
       const data = await fetchData();
       images = data;
+    } catch (error) {
+      console.error(error);
+      return;
     }
-  } catch (error) {
-    console.error(error);
-  } finally {
-    introduceImg(images);
   }
+
+  introduceImg(images);
 });
 
 /**
@@ -41,24 +77,25 @@ document.addEventListener("DOMContentLoaded", async () => {
  */
 
 const introduceImg = (images) => {
-  console.log(images);
-  images.forEach((image) => {
-    templateImg.querySelector("img").setAttribute("src", image.src);
-    templateImg.querySelector("img").setAttribute("alt", image.category);
-    templateImg.querySelector("div").setAttribute("id", image.id);
+  const templateContent = templateImg.content;
 
-    const clone = templateImg.cloneNode(true);
-    container?.appendChild(clone);
+  images.forEach((image) => {
+    templateContent.querySelector("img")?.setAttribute("src", image.src);
+    templateContent.querySelector("img")?.setAttribute("alt", image.category);
+    templateContent.querySelector("div")?.setAttribute("id", String(image.id));
+
+    const clone = templateContent.cloneNode(true);
+    container.appendChild(clone);
   });
 };
 
-openButton?.addEventListener("click", () =>
-  ventanaModal?.classList.add("visible")
+openButton.addEventListener("click", () =>
+  ventanaModal.classList.add("visible")
 );
 
-closeButton?.addEventListener("click", () => {
-  ventanaModal?.classList.remove("visible");
-  console.log(selectCategories);
+closeButton.addEventListener("click", () => {
+  ventanaModal.classList.remove("visible");
+  selectCategories.value = "";
 });
 
 const introduceNewImg = (newImage) => {
@@ -82,7 +119,6 @@ const addImage = (e) => {
       alt: category,
       id: +new Date(),
     };
-
     introduceNewImg(newImage);
     let newImages = [...images, newImage];
     images = newImages;
@@ -92,7 +128,7 @@ const addImage = (e) => {
   }
 };
 
-addImg.addEventListener("click", (e) => addImage(e));
+addImg?.addEventListener("click", (e) => addImage(e));
 
 const openCheckbox = () => {
   if (images.length === 0) {

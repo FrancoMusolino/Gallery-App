@@ -1,65 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gallery App</title>
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/dfb3a348e3.js" crossorigin="anonymous"></script>
-</head>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/dfb3a348e3.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<body>
+  <body>
     <h1 class="title" role="heading">Galería</h1>
 
-    <hr>
+    <hr />
 
     <nav class="navbar" role="menu">
-        <div class="navbar__add-image">
-            <h2 class="navbar__title">Mis fotos</h2>
-            <div class="navbar__button" id="open">+</div>
-        </div>
-        <div class="navbar__delete-image" id="delete-image">
-            <p class="navbar__text">Eliminar Imágenes</p>
-            <i class="navbar__icon far fa-trash-alt" id="trash-icon"></i>
-        </div>
+      <div class="navbar__add-image">
+        <h2 class="navbar__title">Mis fotos</h2>
+        <div class="navbar__button" id="open">+</div>
+      </div>
+      <div class="navbar__delete-image" id="delete-image">
+        <p class="navbar__text">Eliminar Imágenes</p>
+        <button id="trash-icon">
+          <i class="navbar__icon far fa-trash-alt"></i>
+        </button>
+      </div>
     </nav>
 
-    <div class="main-container" id="container" role="main">
-    </div>
+    <div class="main-container" id="container" role="main"></div>
 
     <div class="delete-container" id="delete-container">
-        <button class="delete-container__button delete-container__button--cancel" id="cancel-button">CANCELAR</button>
-        <button class="delete-container__button" id="delete-button">ELIMINAR</button>
+      <button
+        class="delete-container__button delete-container__button--cancel"
+        id="cancel-button"
+      >
+        CANCELAR
+      </button>
+      <button class="delete-container__button" id="delete-button">
+        ELIMINAR
+      </button>
     </div>
 
     <section class="ventana-modal" role="form">
-        <h2 class="ventana-modal__title">Agregar Imagen</h2>
-        <select class="ventana-modal__form" id="categories">
-            <option class="ventana-modal__option" value="" selected></option>
-            <option class="ventana-modal__option" value="animals">Animales</option>
-            <option class="ventana-modal__option" value="arch">Arquitectura</option>
-            <option class="ventana-modal__option" value="nature">Naturaleza</option>
-            <option class="ventana-modal__option" value="people">Gente</option>
-            <option class="ventana-modal__option" value="tech">Tecnología</option>
-        </select>
+      <h2 class="ventana-modal__title">Agregar Imagen</h2>
+      <select class="ventana-modal__form" id="categories">
+        <option class="ventana-modal__option" value="" selected></option>
+        <option class="ventana-modal__option" value="animals">Animales</option>
+        <option class="ventana-modal__option" value="arch">Arquitectura</option>
+        <option class="ventana-modal__option" value="nature">Naturaleza</option>
+        <option class="ventana-modal__option" value="people">Gente</option>
+        <option class="ventana-modal__option" value="tech">Tecnología</option>
+      </select>
 
-        <div class="ventana-modal__button-container">
-            <button class="ventana-modal__close-button" id="close">Cancelar</button>
-            <input class="ventana-modal__add-button" id="add-button" type="submit" value="Agregar"></input>
-        </div>
+      <div class="ventana-modal__button-container">
+        <button class="ventana-modal__close-button" id="close">Cancelar</button>
+        <button class="ventana-modal__add-button" id="add-button" type="submit">
+          Agregar
+        </button>
+      </div>
     </section>
 
     <template class="template-img" id="templateImg">
-        <div class="template-img__container">
-            <img class="template-img__img" src="" alt="">
-            <input class="template-img__checkbox" type="checkbox">
-        </div>
+      <div class="template-img__container">
+        <img class="template-img__img" src="" alt="" />
+        <input class="template-img__checkbox" type="checkbox" />
+      </div>
     </template>
 
     <script type="module" src="./src/main.js"></script>
-</body>
-
+  </body>
 </html>
