@@ -9,7 +9,14 @@ const templateImg = /**@type {HTMLTemplateElement}*/ (
 );
 
 /**
- * @returns {import('./types').Response[]}
+ * @typedef Response
+ * @property {string} src
+ * @property {string} category
+ * @property {number} id
+ */
+
+/**
+ * @returns {Promise<Response[]>}
  */
 
 export const fetchData = async () => {
@@ -19,6 +26,7 @@ export const fetchData = async () => {
     return data;
   } catch (error) {
     console.error(error);
+    return [];
   }
 };
 
@@ -44,6 +52,30 @@ export const setLS = (key, value) => {
 };
 
 /**
+ * @param {Element | null} element
+ */
+
+const generateEventForImage = (element) => {
+  if (!element) return;
+
+  const checkboxInput = /**@type {HTMLInputElement}*/ (
+    element.lastElementChild
+  );
+
+  const handleMouseClick = () => {
+    if (!checkboxInput.classList.contains("visible-checkbox")) return;
+
+    if (!checkboxInput.checked) {
+      checkboxInput.checked = true;
+    } else {
+      checkboxInput.checked = false;
+    }
+  };
+
+  element.addEventListener("click", handleMouseClick);
+};
+
+/**
  * @param {import('./types').Response} image
  */
 
@@ -57,4 +89,6 @@ export const printImg = (image) => {
 
   const clone = templateContent.cloneNode(true);
   container.appendChild(clone);
+
+  generateEventForImage(container.lastElementChild);
 };

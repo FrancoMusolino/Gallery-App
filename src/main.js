@@ -63,14 +63,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  addInitialImages(images);
+  addImages(images);
 });
 
 /**
  * @param {import('./types').Response[]} images
  */
 
-const addInitialImages = (images) => {
+const addImages = (images) => {
   images.forEach((image) => {
     printImg(image);
   });
@@ -103,11 +103,11 @@ const addImage = (e) => {
 
   /**@type {string} */
 
-  let category = selectCategories.value;
+  const category = selectCategories.value;
 
   /**@type {import('./types').Response} */
 
-  let newImage = {
+  const newImage = {
     src: `https://placeimg.com/640/480/${category}`,
     category,
     id: +new Date(),
@@ -141,18 +141,7 @@ const openCheckbox = () => {
     );
 
     checkboxInput.classList.toggle("visible-checkbox");
-
-    image.addEventListener("click", () => {
-      if (!checkboxInput.classList.contains("visible-checkbox")) {
-        return;
-      }
-
-      if (!checkboxInput.checked) {
-        checkboxInput.checked = true;
-      } else {
-        checkboxInput.checked = false;
-      }
-    });
+    checkboxInput.checked = false;
   });
 };
 
@@ -174,11 +163,16 @@ const deleteImages = () => {
       image.lastElementChild
     );
 
+    const idAtttibute = image.getAttribute("id");
+
     /**
      * @type {number}
      */
+    let ID = 0;
 
-    const ID = +image.getAttribute("id");
+    if (idAtttibute) {
+      ID = +idAtttibute;
+    }
 
     if (checkboxInput.checked) {
       inputsChecked = [...inputsChecked, ID];
@@ -205,9 +199,7 @@ const deleteImages = () => {
       container.removeChild(container.firstElementChild);
     }
 
-    images.forEach((image) => {
-      printImg(image);
-    });
+    addImages(images);
 
     setLS("images", images);
 
@@ -218,15 +210,15 @@ const deleteImages = () => {
 deleteButton.addEventListener("click", deleteImages);
 
 const cancelImgDelete = () => {
-  deleteContainer.classList.remove("delete-container--visible");
-  trashIcon.classList.remove("navbar__icon--animation");
-  const imagesInDom = document.querySelectorAll(".template-img__container");
-  imagesInDom.forEach((item) => {
-    const itemCheckbox = item.querySelector("input");
-    if (itemCheckbox.getAttribute("checked")) {
-      itemCheckbox.removeAttribute("checked");
-    }
-    itemCheckbox.classList.remove("visible-checkbox");
+  toggleDeleteVisibility();
+
+  const inputsCheckbox = /**@type {NodeListOf<HTMLInputElement>}*/ (
+    document.querySelectorAll("#select-image")
+  );
+
+  inputsCheckbox.forEach((input) => {
+    input.checked = false;
+    input.classList.remove("visible-checkbox");
   });
 };
 
