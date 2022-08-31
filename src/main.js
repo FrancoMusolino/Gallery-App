@@ -85,6 +85,11 @@ closeButton.addEventListener("click", () => {
   selectCategories.value = "";
 });
 
+const toggleDeleteVisibility = () => {
+  trashIcon.classList.toggle("navbar__icon--animation");
+  deleteContainer.classList.toggle("delete-container--visible");
+};
+
 /**
  * @param {MouseEvent} e
  */
@@ -120,72 +125,97 @@ const addImage = (e) => {
 addImg.addEventListener("click", (e) => addImage(e));
 
 const openCheckbox = () => {
-  if (images.length === 0) {
-    alert("No hay imágenes para eliminar");
-  } else {
-    trashIcon.classList.toggle("navbar__icon--animation");
-    deleteContainer.classList.toggle("delete-container--visible");
-    const imagesInDom = document.querySelectorAll(".template-img__container");
-    imagesInDom.forEach((item) => {
-      const itemCheckbox = item.querySelector("input");
-      itemCheckbox.classList.toggle("visible-checkbox");
-
-      item.addEventListener("click", () => {
-        if (!itemCheckbox.getAttribute("checked")) {
-          itemCheckbox.setAttribute("checked", true);
-        } else {
-          itemCheckbox.removeAttribute("checked");
-        }
-      });
-    });
+  if (!images.length) {
+    return alert("No hay imágenes para eliminar");
   }
+
+  toggleDeleteVisibility();
+
+  const imagesInDom = /**@type {NodeListOf<HTMLElement>}*/ (
+    document.querySelectorAll(".template-img__container")
+  );
+
+  imagesInDom.forEach((image) => {
+    const checkboxInput = /**@type {HTMLInputElement}*/ (
+      image.lastElementChild
+    );
+
+    checkboxInput.classList.toggle("visible-checkbox");
+
+    image.addEventListener("click", () => {
+      if (!checkboxInput.classList.contains("visible-checkbox")) {
+        return;
+      }
+
+      if (!checkboxInput.checked) {
+        checkboxInput.checked = true;
+      } else {
+        checkboxInput.checked = false;
+      }
+    });
+  });
 };
 
 deleteImg.addEventListener("click", openCheckbox);
 
-const deleteItemOfArray = (id) => {
-  let newId = parseInt(id);
-  let newImages = images.filter((el) => el.id !== newId);
-  images = newImages;
-  localStorage.setItem("images", JSON.stringify(newImages));
-};
+const deleteImages = () => {
+  const imagesInDom = /**@type {NodeListOf<HTMLElement>}*/ (
+    document.querySelectorAll(".template-img__container")
+  );
 
-const deleteImage = () => {
-  const imagesInDom = document.querySelectorAll(".template-img__container");
-  let contador = 0;
-  imagesInDom.forEach((item) => {
-    const itemCheckbox = item.querySelector("input");
-    if (itemCheckbox.checked) {
-      contador++;
+  /**
+   * @type {number[]}
+   */
+
+  let inputsChecked = [];
+
+  imagesInDom.forEach((image) => {
+    const checkboxInput = /**@type {HTMLInputElement}*/ (
+      image.lastElementChild
+    );
+
+    /**
+     * @type {number}
+     */
+
+    const ID = +image.getAttribute("id");
+
+    if (checkboxInput.checked) {
+      inputsChecked = [...inputsChecked, ID];
     }
   });
 
-  if (contador === 0) {
-    alert("No hay imágenes seleccionadas para eliminar");
-    return;
+  if (!inputsChecked.length) {
+    return alert("No hay imágenes seleccionadas para eliminar");
   }
 
-  let auth =
-    contador === 1
+  /**
+   * @type {boolean}
+   */
+
+  const auth =
+    inputsChecked.length === 1
       ? confirm("¿Desea eliminar la imagen?")
-      : confirm(`¿Desea eliminar las ${contador} imágenes?`);
+      : confirm(`¿Desea eliminar las ${inputsChecked.length} imágenes?`);
 
   if (auth) {
-    imagesInDom.forEach((item) => {
-      const itemCheckbox = item.querySelector("input");
-      if (itemCheckbox.checked) {
-        let itemId = item.getAttribute("id");
-        deleteItemOfArray(itemId);
-        container.removeChild(item);
-      }
-      itemCheckbox.classList.remove("visible-checkbox");
+    images = images.filter((image) => !inputsChecked.includes(image.id));
+
+    while (!!container.firstElementChild) {
+      container.removeChild(container.firstElementChild);
+    }
+
+    images.forEach((image) => {
+      printImg(image);
     });
-    deleteContainer.classList.remove("delete-container--visible");
-    trashIcon.classList.remove("navbar__icon--animation");
+
+    setLS("images", images);
+
+    toggleDeleteVisibility();
   }
 };
 
-deleteButton.addEventListener("click", deleteImage);
+deleteButton.addEventListener("click", deleteImages);
 
 const cancelImgDelete = () => {
   deleteContainer.classList.remove("delete-container--visible");

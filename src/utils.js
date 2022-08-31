@@ -48,11 +48,12 @@ export const setLS = (key, value) => {
  */
 
 export const printImg = (image) => {
+  const { category, id, src } = image;
   const templateContent = templateImg.content;
 
-  templateContent.querySelector("img")?.setAttribute("src", image.src);
-  templateContent.querySelector("img")?.setAttribute("alt", image.category);
-  templateContent.querySelector("div")?.setAttribute("id", String(image.id));
+  templateContent.querySelector("img")?.setAttribute("src", src);
+  templateContent.querySelector("img")?.setAttribute("alt", category);
+  templateContent.querySelector("div")?.setAttribute("id", String(id));
 
   const clone = templateContent.cloneNode(true);
   container.appendChild(clone);
