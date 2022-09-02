@@ -6,16 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gallery App</title>
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+
+    <script
+      src="https://kit.fontawesome.com/dfb3a348e3.js"
+      crossorigin="anonymous"
+    ></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
       rel="stylesheet"
     />
-    <script
-      src="https://kit.fontawesome.com/dfb3a348e3.js"
-      crossorigin="anonymous"
-    ></script>
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -25,14 +27,10 @@
     <div class="main-container" id="container" role="main"></div>
 
     <div class="delete-container" id="delete-container">
-      <button
-        class="delete-container__button delete-container__button--cancel"
-        id="cancel-button"
-      >
-        CANCELAR
-      </button>
+      <button class="delete-container__button" id="cancel-button">X</button>
+      <div class="delete__divider"></div>
       <button class="delete-container__button" id="delete-button">
-        ELIMINAR
+        <i class="fa-solid fa-trash"></i>
       </button>
     </div>
 

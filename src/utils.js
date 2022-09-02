@@ -9,28 +9,6 @@ const templateImg = /**@type {HTMLTemplateElement}*/ (
 );
 
 /**
- * @typedef Response
- * @property {string} src
- * @property {string} category
- * @property {number} id
- */
-
-/**
- * @returns {Promise<Response[]>}
- */
-
-export const fetchData = async () => {
-  try {
-    const res = await fetch("api.json");
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-};
-
-/**
  * @param {string} key
  * @returns {import('./types').Response[] | null}
  */

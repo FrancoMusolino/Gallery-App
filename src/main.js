@@ -1,6 +1,7 @@
 // @ts-check
 
-import { fetchData, getLS, printImg, setLS } from "./utils.js";
+import { getLS, printImg, setLS } from "./utils.js";
+import { data } from "./data.js";
 
 const container = /**
  @type {HTMLElement}
@@ -54,13 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (dataInLS) {
     images = dataInLS;
   } else {
-    try {
-      const data = await fetchData();
-      images = data;
-    } catch (error) {
-      console.error(error);
-      return;
-    }
+    images = data;
   }
 
   addImages(images);
@@ -83,6 +78,7 @@ const toggleDeleteVisibility = () => {
 const handleToggleVisibility = () => {
   ventanaModal.classList.toggle("visible");
   overlay.classList.toggle("overlay-visible");
+  deleteContainer.classList.remove("delete-container--visible");
   selectCategories.value = "";
 
   const checkboxs = /**@type {NodeListOf<HTMLInputElement>}*/ (
@@ -121,7 +117,7 @@ const addImage = (e) => {
   /**@type {import('./types').Response} */
 
   const newImage = {
-    src: `https://placeimg.com/640/480/${category}`,
+    src: `https://placeimg.com/200/200/${category}`,
     category,
     id: +new Date(),
   };

@@ -88,44 +88,62 @@ body {
   margin: 0 auto;
 }
 
-/******** A REVISAR ********/
+/******** ELIMINAR IMGS ********/
 
 .delete-container {
+  position: fixed;
+  top: calc(50vh - 35px);
+  right: 0;
+  z-index: 5000;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 15px;
-  align-items: center;
-  margin: 25px;
-  visibility: hidden;
+
+  width: 40px;
+  height: 70px;
+
+  background-color: #fff;
+  border: 1px solid gray;
+  border-right: none;
+
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+
+  transform: translateX(100px);
+
+  transition: transform 0.5s ease-out;
+}
+
+.delete__divider {
+  width: 100%;
+  height: 1px;
+
+  background-color: gray;
 }
 
 .delete-container__button {
-  width: 60%;
-  padding: 6px;
-  letter-spacing: 4px;
-  color: #fff;
-  background-color: #c82333;
+  flex-grow: 1;
+
+  width: 100%;
+
+  text-align: center;
+  vertical-align: middle;
+
+  background-color: transparent;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
 }
 
-.delete-container__button--cancel {
-  color: #ddd;
-  background-color: #222;
+.delete-container__button > i {
+}
+
+.delete-container__button:active {
+  transform: scale(0.9);
 }
 
 .delete-container--visible {
   visibility: visible;
-}
-
-.delete-container__button:hover {
-  background-color: #e82333;
-}
-
-.delete-container__button--cancel:hover {
-  background-color: #454545;
+  transform: translateX(0);
 }
 
 /******** VENTANA MODAL ********/
@@ -274,10 +292,9 @@ body {
   }
 
   .delete-container {
-    flex-direction: row;
-  }
+    top: calc(50vh - 50px);
 
-  .delete-container__button {
-    width: 25%;
+    width: 50px;
+    height: 100px;
   }
 }
