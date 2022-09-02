@@ -1,300 +1,283 @@
+/******** VARIABLES ********/
+
 :root {
-    --step--2: clamp(1.48rem, 1.27rem + 1.02vw, 2.00rem);
-    --step--1: clamp(1.77rem, 1.49rem + 1.42vw, 2.50rem);
-    --step-0: clamp(2.13rem, 1.73rem + 1.95vw, 3.13rem);
-    --step-1: clamp(2.55rem, 2.02rem + 2.65vw, 3.91rem);
-    --step-2: clamp(3.06rem, 2.35rem + 3.56vw, 4.88rem);
-    --step-3: clamp(3.67rem, 2.72rem + 4.75vw, 6.10rem);
-    --step-4: clamp(4.41rem, 3.15rem + 6.29vw, 7.63rem);
-    --step-5: clamp(5.29rem, 3.63rem + 8.29vw, 9.54rem);
-  }
+  --step--2: clamp(1.48rem, 1.27rem + 1.02vw, 2rem);
+  --step--1: clamp(1.77rem, 1.49rem + 1.42vw, 2.5rem);
+  --step-0: clamp(2.13rem, 1.73rem + 1.95vw, 3.13rem);
+  --step-1: clamp(2.55rem, 2.02rem + 2.65vw, 3.91rem);
+  --step-2: clamp(3.06rem, 2.35rem + 3.56vw, 4.88rem);
+  --step-3: clamp(3.67rem, 2.72rem + 4.75vw, 6.1rem);
+  --step-4: clamp(4.41rem, 3.15rem + 6.29vw, 7.63rem);
+  --step-5: clamp(5.29rem, 3.63rem + 8.29vw, 9.54rem);
 
-html{
-    box-sizing: border-box;
+  --text-black: #000c19;
+  --text-blue: #0055b3;
+  --text-dark-blue: #003166;
 }
 
-body{
-    margin: 0;
-    -webkit-tap-highlight-color: transparent;
+/******** GLOBAL ********/
+
+* {
+  font-family: "Poppins", sans-serif;
 }
 
-.title{
-    text-align: center;
-    font-size: var(--step-2);
-    font-family:'Arial Narrow Bold', sans-serif;
-    color: #eed183;
-    letter-spacing: 2px;
-    user-select: none;
+html {
+  box-sizing: border-box;
 }
 
-.title:hover{
-    transform: scale(1.2);
-    transition: transform .5s;
+body {
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.navbar{
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+.title {
+  text-align: center;
+  font-size: var(--step-0);
+  font-weight: 400;
+  color: var(--text-black);
+  user-select: none;
 }
 
-.navbar__add-image{
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+/******** CONTROLLERS ********/
+
+.controllers {
+  position: fixed;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+
+  width: 100vw;
+
+  background-color: #fff;
+  border-top: 1px solid gray;
 }
 
-.navbar__title{
-    margin: 15px 0;
-    font-size: var(--step--1);
-    font-weight: 400;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.controllers__divider {
+  width: 1px;
+  background-color: gray;
+  height: 57px;
 }
 
-.navbar__button{
-    border: solid 1.5px #aaa;
-    border-radius: 50%;
-    height: 20px;
-    width: 20px;
-    padding: .5rem;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #aaa;
-    cursor: pointer;
+.controllers__button {
+  flex-grow: 1;
+
+  padding: 1rem;
+
+  background-color: transparent;
+  border: none;
+
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--text-blue);
+  cursor: pointer;
 }
 
-.navbar__delete-image{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
+.controllers__button:active {
+  transform: scale(0.9);
 }
 
-.navbar__text{
-    font-size: var(--step--2);
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+/******** MAIN ********/
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 5px;
+
+  padding-inline: 10px;
+  margin: 0 auto;
 }
 
-.navbar__icon{
-    color: #e00;
-    font-size: var(--step-0);
+/******** A REVISAR ********/
+
+.delete-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+  margin: 25px;
+  visibility: hidden;
 }
 
-.navbar__icon--animation{
-    animation: trash 1s ease-in infinite;
+.delete-container__button {
+  width: 60%;
+  padding: 6px;
+  letter-spacing: 4px;
+  color: #fff;
+  background-color: #c82333;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-@keyframes trash{
-    0%{ transform: rotate(0); } 
-
-    20%{ transform: rotate(25deg); }
-
-    40%{ transform: rotate(-25deg); }
-
-    60%{ transform: rotate(25deg); }
-
-    80%{ transform: rotate(-25deg); }
-
-    100%{ transform: rotate(0); }
+.delete-container__button--cancel {
+  color: #ddd;
+  background-color: #222;
 }
 
-.main-container{
-    margin: 0;
-    width: 100vw;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
+.delete-container--visible {
+  visibility: visible;
 }
 
-.delete-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 15px;
-    align-items: center;
-    margin: 25px;
-    visibility: hidden;
+.delete-container__button:hover {
+  background-color: #e82333;
 }
 
-.delete-container__button{
-    width: 60%;
-    padding: 6px;
-    letter-spacing: 4px;
-    color: #fff;
-    background-color: #c82333;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.delete-container__button--cancel:hover {
+  background-color: #454545;
 }
 
-.delete-container__button--cancel{
-    color: #ddd;
-    background-color: #222;
+/******** VENTANA MODAL ********/
+
+.ventana-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1000;
+
+  max-width: 400px;
+  width: 85%;
+
+  padding: 1rem;
+
+  background-color: #fff;
+  border-radius: 5px;
+
+  transform: translateY(-1200px);
+
+  transition: transform 1s ease-out;
 }
 
-.delete-container--visible{
-    visibility: visible;
+.ventana-modal__title {
+  margin-top: 10px;
+
+  color: var(--text-dark-blue);
+  font-weight: 500;
 }
 
-.delete-container__button:hover{
-    background-color: #e82333;
+.ventana-modal__description {
+  color: var(--text-black);
+  font-weight: 400;
 }
 
-.delete-container__button--cancel:hover{
-    background-color: #454545;
+.ventana-modal__form {
+  border: 0px;
+  border-bottom: 1px solid gray;
+  border-radius: 5px;
+
+  cursor: pointer;
 }
 
-.ventana-modal{
-    position: fixed;
-    left: 16%;
-    top: -1200px;
-    width: 65%;
-    border: solid 2px #aaa;
-    background-color: #eeeeee;
-    border-radius: 10px;
-    transition: top 1s linear;
+.ventana-modal__form:focus {
+  outline: none;
 }
 
-.ventana-modal__title{
-    text-align: center;
-    color: forestgreen;
-    font-size: clamp(1.5rem, 2rem, 3rem);
+.ventana-modal__button-container {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 20px;
 }
 
-.ventana-modal__form{
-    display: block;
-    margin: 0 auto;
-    width: 60%;
-    height: 35px;
-    border: 0px;
-    border-radius: 7px;
-    background: linear-gradient(to bottom, #ccc, #888);
-    margin-bottom: 30px;
-    cursor: pointer;
+.ventana-modal__direct-container {
+  display: flex;
+  justify-content: space-between;
+
+  width: 150px;
 }
 
-.ventana-modal__form:focus{
-    outline: none;
+.ventana-modal__close-button {
+  outline: none;
+  border: none;
+  background-color: var(--text-blue);
+  color: #fff;
+  cursor: pointer;
 }
 
-.ventana-modal__button-container{
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 10px;
-}
-
-.ventana-modal__close-button{
-    background-color: #82d3d9;
-    cursor: pointer;
-
-}
-
-.ventana-modal__close-button:hover{
-    background-color: #a2e3e9;
-
-}
-
-.ventana-modal__add-button{
-    background-color: #eee;
-    cursor: pointer;
-}
-
-.ventana-modal__add-button:hover{
-    background-color: #fff;
+.ventana-modal__add-button {
+  background-color: #eee;
 }
 
 .ventana-modal__close-button,
-.ventana-modal__add-button{
-    border-radius: 5px;
-    font-weight: 500;
-    width: 30%;
-    height: 30px;
-    border: 1px solid #333;
+.ventana-modal__add-button {
+  padding: 0.5rem;
+
+  border: none;
+  outline: none;
+  border-radius: 5px;
+
+  font-weight: 400;
+
+  cursor: pointer;
 }
 
-.visible{
-    top: calc((100vh / 2) - 90px);
-}
- 
-.template-img__container{
-    position: relative;
-    overflow: hidden;
-    border-radius: .3rem;
+.ventana-modal__close-button:hover,
+.ventana-modal__add-button:hover {
+  opacity: 0.85;
 }
 
-.template-img__img{
-    object-fit: cover;
-    border-radius: .3rem;
-    width: calc((100vw / 3) - (4px / 3));
-    height: calc((100vw / 3) - (4px / 3));
+.visible {
+  transform: translateY(calc((100vh / 2) - 90px));
 }
 
-.template-img__checkbox{
-    position: absolute;
-    top: 3%;
-    right: 3%;
-    visibility: hidden;
-    cursor: pointer;
+.overlay {
+  position: fixed;
+  top: 0;
+
+  display: none;
+
+  width: 100%;
+  height: 100vh;
+
+  background-color: gray;
+  opacity: 0.4;
 }
 
-.visible-checkbox{
-    visibility: visible;
+.overlay-visible {
+  display: inline;
+}
+
+/******** TEMPLATE ********/
+
+.template-img__container {
+  position: relative;
+  width: 100%;
+}
+
+.template-img__img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.3rem;
+}
+
+.template-img__checkbox {
+  position: absolute;
+  top: 3%;
+  right: 3%;
+  cursor: pointer;
+
+  visibility: hidden;
+}
+
+.visible-checkbox {
+  visibility: visible;
 }
 
 @media only screen and (min-width: 740px) {
-    .navbar__add-image{
-        justify-content: space-around;
-    }
+  .main-container {
+    width: 80%;
+    gap: 10px;
+  }
 
-    .navbar__delete-image{
-        justify-content: space-around;
-    }
+  .delete-container {
+    flex-direction: row;
+  }
 
-    .main-container{
-        margin: 0 auto;
-        width: 80%;
-        gap: 10px;
-    }
-
-    .delete-container{
-        flex-direction: row;
-    }
-
-    .delete-container__button{
-        width: 25%;
-    }
-
-    .template-img__img{
-        width: calc( 75vw / 3);
-        height: calc(75vw / 3);
-    }
-
-    
-    .ventana-modal{
-        left: 30%;
-        width: 40%;
-    }
-
-    .ventana-modal__title{
-        margin-bottom: 55px;
-    }
-
-    .ventana-modal__form{
-        height: 40px;
-        border: 0px;
-        border-radius: 7px;
-        background: linear-gradient(to bottom, #ccc, #888);
-        margin-bottom: 65px;
-    }
-
-    .template-img__checkbox{
-       right: 4%;
-    }
+  .delete-container__button {
+    width: 25%;
+  }
 }

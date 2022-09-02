@@ -6,7 +6,9 @@ const container = /**
  @type {HTMLElement}
  */ (document.getElementById("container"));
 
-const openButton = /**@type {HTMLElement}*/ (document.getElementById("open"));
+const openButton = /**@type {HTMLButtonElement}*/ (
+  document.getElementById("add")
+);
 
 const closeButton = /**@type {HTMLButtonElement}*/ (
   document.getElementById("close")
@@ -24,12 +26,8 @@ const addImg = /**@type {HTMLButtonElement}*/ (
   document.getElementById("add-button")
 );
 
-const deleteImg = /**@type {HTMLElement}*/ (
-  document.getElementById("delete-image")
-);
-
-const trashIcon = /**@type {HTMLButtonElement}*/ (
-  document.getElementById("trash-icon")
+const deleteImg = /**@type {HTMLButtonElement}*/ (
+  document.getElementById("delete")
 );
 
 const deleteContainer = /**@type {HTMLElement}*/ (
@@ -43,6 +41,8 @@ const deleteButton = /**@type {HTMLButtonElement}*/ (
 const cancelButton = /**@type {HTMLButtonElement}*/ (
   document.getElementById("cancel-button")
 );
+
+const overlay = /**@type {HTMLElement}*/ (document.getElementById("overlay"));
 
 /** @type {import('./types').Response[]} */
 
@@ -76,19 +76,32 @@ const addImages = (images) => {
   });
 };
 
-openButton.addEventListener("click", () =>
-  ventanaModal.classList.add("visible")
-);
-
-closeButton.addEventListener("click", () => {
-  ventanaModal.classList.remove("visible");
-  selectCategories.value = "";
-});
-
 const toggleDeleteVisibility = () => {
-  trashIcon.classList.toggle("navbar__icon--animation");
   deleteContainer.classList.toggle("delete-container--visible");
 };
+
+const handleToggleVisibility = () => {
+  ventanaModal.classList.toggle("visible");
+  overlay.classList.toggle("overlay-visible");
+  selectCategories.value = "";
+
+  const checkboxs = /**@type {NodeListOf<HTMLInputElement>}*/ (
+    document.querySelectorAll("#select-image")
+  );
+
+  checkboxs.forEach((checkbox) => {
+    if (checkbox.classList.contains("visible-checkbox")) {
+      checkbox.classList.remove("visible-checkbox");
+      checkbox.checked = false;
+    }
+  });
+};
+
+openButton.addEventListener("click", handleToggleVisibility);
+
+closeButton.addEventListener("click", handleToggleVisibility);
+
+overlay.addEventListener("click", handleToggleVisibility);
 
 /**
  * @param {MouseEvent} e
@@ -116,8 +129,7 @@ const addImage = (e) => {
   printImg(newImage);
   images.push(newImage);
 
-  ventanaModal.classList.remove("visible");
-  selectCategories.value = "";
+  handleToggleVisibility();
 
   setLS("images", images);
 };

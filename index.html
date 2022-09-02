@@ -6,30 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gallery App</title>
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
     <script
       src="https://kit.fontawesome.com/dfb3a348e3.js"
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <h1 class="title" role="heading">Galería</h1>
-
-    <hr />
-
-    <nav class="navbar" role="menu">
-      <div class="navbar__add-image">
-        <h2 class="navbar__title">Mis fotos</h2>
-        <div class="navbar__button" id="open">+</div>
-      </div>
-      <div class="navbar__delete-image" id="delete-image">
-        <p class="navbar__text">Eliminar Imágenes</p>
-        <button id="trash-icon">
-          <i class="navbar__icon far fa-trash-alt"></i>
-        </button>
-      </div>
-    </nav>
 
     <div class="main-container" id="container" role="main"></div>
 
@@ -45,24 +36,54 @@
       </button>
     </div>
 
+    <section class="controllers" role="menu">
+      <button class="controllers__button" id="delete">Eliminar</button>
+      <div class="controllers__divider"></div>
+      <button class="controllers__button" id="add">Agregar</button>
+    </section>
+
     <section class="ventana-modal" role="form">
-      <h2 class="ventana-modal__title">Agregar Imagen</h2>
-      <select class="ventana-modal__form" id="categories">
-        <option class="ventana-modal__option" value="" selected></option>
-        <option class="ventana-modal__option" value="animals">Animales</option>
-        <option class="ventana-modal__option" value="arch">Arquitectura</option>
-        <option class="ventana-modal__option" value="nature">Naturaleza</option>
-        <option class="ventana-modal__option" value="people">Gente</option>
-        <option class="ventana-modal__option" value="tech">Tecnología</option>
-      </select>
+      <h2 class="ventana-modal__title">Agrega una imagen</h2>
+      <div>
+        <p class="ventana-modal__description">
+          Elige una de las siguientes categorías
+        </p>
+        <select class="ventana-modal__form" id="categories">
+          <option
+            hidden
+            selected
+            class="ventana-modal__option"
+            value=""
+          ></option>
+          <option class="ventana-modal__option" value="animals">
+            Animales
+          </option>
+          <option class="ventana-modal__option" value="arch">
+            Arquitectura
+          </option>
+          <option class="ventana-modal__option" value="nature">
+            Naturaleza
+          </option>
+          <option class="ventana-modal__option" value="people">Gente</option>
+          <option class="ventana-modal__option" value="tech">Tecnología</option>
+        </select>
+      </div>
 
       <div class="ventana-modal__button-container">
-        <button class="ventana-modal__close-button" id="close">Cancelar</button>
-        <button class="ventana-modal__add-button" id="add-button" type="submit">
-          Agregar
-        </button>
+        <div class="ventana-modal__direct-container">
+          <button class="ventana-modal__close-button" id="close">Cerrar</button>
+          <button
+            class="ventana-modal__add-button"
+            id="add-button"
+            type="submit"
+          >
+            Agregar
+          </button>
+        </div>
       </div>
     </section>
+
+    <div class="overlay" id="overlay"></div>
 
     <template class="template-img" id="templateImg">
       <div class="template-img__container">
